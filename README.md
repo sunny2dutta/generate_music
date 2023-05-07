@@ -1,2 +1,7 @@
-# generate_music
-Create music using deep learning. Starts with learning to use deep learning better using tensorflow with an aim to generate music 
+# learn Deep Learning
+Here I will pickup various courses and work throigh examples as the course progress
+
+1. Introduction to Deep Learning (Alexander Amini, Ava Amini) (MIT 6.S191)
+
+a. Defining a Perceptron and build a simple Neural Network, later abstract it using tensorflow
+b. Intuition behind RNN and build it
