@@ -37,7 +37,7 @@ def image2grayscale(image):
     return imgGray
 
 def show_image(x):
-    plt.imshow(np.clip(x, 0, 1))
+    plt.imshow(np.clip(x+.5, 0, 1))
 
 
 def visualize(img,encoder,decoder):
@@ -62,7 +62,8 @@ def visualize(img,encoder,decoder):
 
 
 def train_autoencoder(image,code_size):
-    image = image.astype('float32') / 255.
+    image = image.astype('float32') / 255. - 0.5
+
 
     encoder, decoder = build_autoencoder(image, code_size)
 
