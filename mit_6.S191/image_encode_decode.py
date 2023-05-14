@@ -37,7 +37,7 @@ def image2grayscale(image):
     return imgGray
 
 def show_image(x):
-    plt.imshow(np.clip(x+.5, 0, 1))
+    plt.imshow(np.clip(x, 0, 255))
 
 
 def visualize(img,encoder,decoder):
@@ -48,7 +48,6 @@ def visualize(img,encoder,decoder):
 
     plt.subplot(1,3,1)
     plt.title("Original")
-
     show_image(img)
 
     plt.subplot(1,3,2)
@@ -62,9 +61,6 @@ def visualize(img,encoder,decoder):
 
 
 def train_autoencoder(image,code_size):
-    image = image.astype('float32') / 255. - 0.5
-
-
     encoder, decoder = build_autoencoder(image, code_size)
 
     inp = tf.keras.layers.Input(image.shape)
@@ -72,7 +68,7 @@ def train_autoencoder(image,code_size):
     reconstruction = decoder(code)
 
     autoencoder = tf.keras.models.Model(inp,reconstruction)
-    autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
+    autoencoder.compile(optimizer='adamax', loss='mse')
 
     print(autoencoder.summary())
     
@@ -86,5 +82,3 @@ def train_autoencoder(image,code_size):
     plt.show()
 
     return encoder,decoder
-    
-
