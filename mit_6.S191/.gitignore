@@ -1,0 +1,16 @@
+# Ignore specific file
+filename.txt
+.DS_Store
+
+# Ignore files with a specific extension
+*.log
+*.tmp
+
+
+# Ignore a specific directory and its contents
+data_set_images/
+data_anime/
+
+# Ignore all files with a certain name within any directory
+*/filename.txt
+
