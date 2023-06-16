@@ -2,6 +2,9 @@
 filename.txt
 .DS_Store
 
+
+=======
+>>>>>>> bug_fix/no_colour_convert
 # Ignore files with a specific extension
 *.log
 *.tmp
