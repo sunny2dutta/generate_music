@@ -22,3 +22,34 @@ def show_image_dir(dataset_path,row_of_images,col_of_images):
         ax.axis('off')
     plt.show()
     return 0
+
+
+
+
+def show_image(x):
+    # Display an image
+    plt.imshow(np.clip(x, 0, 255))
+
+
+def visualize(img, encoder, decoder):
+    """Draws original, encoded, and decoded images"""
+    # Encode the input image
+    code = encoder.predict(img[None])[0]
+    # Decode the encoded image
+    reco = decoder.predict(code[None])[0]
+
+    # Display the original image
+    plt.subplot(1, 3, 1)
+    plt.title("Original")
+    show_image(img)
+
+    # Display the encoded image
+    plt.subplot(1, 3, 2)
+    plt.title("Code")
+    plt.imshow(code.reshape([code.shape[-1] // 2, -1]))
+
+
+    # Display the encoded image
+    plt.subplot(1, 3, 2)
+    plt.title("Code")
+    plt.imshow(code.reshape([code.shape[-1] // 2, -1]))
