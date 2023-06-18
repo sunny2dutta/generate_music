@@ -2,6 +2,8 @@ import cv2
 import os
 
 
+
+
 def convert_to_grayscale_dir(source_dir, file_name):
     """
     Convert RGB image to grayscale, when given an directory and filename
