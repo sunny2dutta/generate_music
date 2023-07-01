@@ -86,7 +86,7 @@ def build_vae(encoder, decoder):
     # Compute the reconstruction loss
     reconstruction_loss = 0
     reconstruction_loss = tf.keras.backend.mean(tf.keras.losses.mean_squared_error(inputs, reconstructed))
-    #reconstruction_loss *= input_shape[0] * input_shape[1] * input_shape[2]  # Scale the loss
+    reconstruction_loss *= input_shape[0] * input_shape[1] * input_shape[2]  # Scale the loss
     
     # Compute the KL divergence loss
     kl_loss = -0.5 * tf.keras.backend.mean(1 + z_log_var - tf.keras.backend.square(z_mean) - tf.keras.backend.exp(z_log_var), axis=-1)
