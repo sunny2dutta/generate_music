@@ -4,7 +4,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
-dataset_path = 'data_anime/'
+dataset_path = '/Users/debaryadutta/learn_dl/mit_6.S191/data_anime/'
 arr = os.listdir(dataset_path)
 
 path = dataset_path+arr[0]
@@ -74,6 +74,8 @@ def build_decoder(latent_dim,input_shape):
 # VAE model
 
 
+
+
 def build_vae(encoder, decoder):
     inputs = encoder.input
     z_mean, z_log_var = encoder(inputs)
@@ -93,6 +95,9 @@ def build_vae(encoder, decoder):
     total_loss = reconstruction_loss + kl_loss
     
     model.add_loss(total_loss)
+
+    #ßtf.keras.utils.plot_model(model, "model.png", show_shapes=True, )
+
     return model
 
 
