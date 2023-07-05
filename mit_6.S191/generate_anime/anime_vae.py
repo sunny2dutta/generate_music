@@ -25,6 +25,22 @@ def load_images(path):
             images.append(img)
     return np.array(images)
 
+def sample_images(path,n):
+    images = []
+    arr = os.listdir(path)
+    index = np.random.randint(len(arr))
+
+    # Get the image data at the selected index
+    image_data = arr[index]
+
+    for filename in image_data:
+        if filename.endswith('.jpg') or filename.endswith('.png'):
+            img = Image.open(os.path.join(path, filename))
+            img = img.resize(input_shape[:2])
+            img = np.array(img) / 255.0
+            images.append(img)
+    return np.array(images)
+
 # Encoder network
 def build_encoder(input_shape, latent_dim):
     inputs = tf.keras.Input(shape=input_shape)
@@ -95,6 +111,8 @@ def build_vae(encoder, decoder):
     total_loss = reconstruction_loss + kl_loss
     
     model.add_loss(total_loss)
+    model.add_metric(kl_loss, name="kl_loss")
+    model.add_metric(reconstruction_loss, name="reconstruction_loss")
 
     #ßtf.keras.utils.plot_model(model, "model.png", show_shapes=True, )
 

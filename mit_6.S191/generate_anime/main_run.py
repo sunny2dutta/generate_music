@@ -6,7 +6,11 @@ import  visualisation as vs
 import anime_vae as vae
 import os
 import numpy as np
+
 dataset_path = '/Users/debaryadutta/learn_dl/mit_6.S191/data_anime/'
+batch_size = 32
+latent_dim = 32
+img_width, img_height = 60,60
 
 images_data = vae.load_images(dataset_path)
 
@@ -21,7 +25,13 @@ input_shape = image.shape
 
 print(input_shape)
 
-latent_dim = 32
+
+# Resize the images
+#resized_images = [image.resize((img_width, img_height)) for image in images_data]
+
+# Convert the images to arrays
+#x_train = np.array([np.array(image) for image in resized_images])
+
 
 encoder = vae.build_encoder(input_shape, latent_dim)
 
@@ -32,14 +42,12 @@ vae_model = vae.build_vae(encoder, decoder)
 
 vae_model.compile(optimizer='adam')
 #vae_model.fit(x_train, epochs=500, batch_size=batch_size, validation_data=(x_test, None))
-
-
+vae_model.fit(images_data, epochs=500, batch_size=batch_size, validation_data=(images_data, None))
 
 num_samples = 10
-latent_vectors = np.random.normal(size=(num_samples, latent_dim))
-
+latent_vectors  = vae.sample_images(dataset_path,num_samples)
 # Decode the latent vectors to generate images
-generated_images = decoder.predict(latent_vectors)
+generated_images = vae_model.predict(latent_vectors)
 
 generated_images = generated_images.reshape((-1, 60, 60))
 
